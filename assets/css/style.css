@@ -1,6 +1,7 @@
 main
 {
-    max-width: 1200px;
+	max-width: 1200px;
+	box-sizing: border-box;
     padding: 0 20px 0 20px;
 }
 
@@ -38,7 +39,6 @@ header
 
 header > div
 {
-
     height: 100%;
     align-items: center;
     justify-content:space-between;
@@ -131,4 +131,124 @@ html, body {
 {
 	background-color:#1fb5e9;
 	transition-timing-function: ease-out;
+}
+
+/* Products CSS Start */
+/* Barre lateral Start */
+#product-categories, #product-criteria
+{
+	display: flex;
+	box-sizing: border-box;
+	flex-direction: column;
+	border-radius: 4px;
+	border: 1px solid #999999;
+}
+
+#product-categories button, #product-criteria button
+{
+	text-align: left;
+	background-color: white;
+	border: 0px;
+	padding: 12px;
+}
+
+#product-categories button:not(:last-child), #product-criteria button:not(:last-child)
+{
+	border-bottom: 1px solid #999999;
+}
+
+#product-categories button:hover, #product-criteria button:hover
+{
+	background-color: #f3f3f3;
+	transition: background-color 0.2s ease-out;
+}
+
+#product-categories button.selected, #product-criteria button.selected
+{
+	background-color: #ddf2fb;
+}
+/* Barre lateral End */
+/* Panneau principal Start */
+#products
+{
+	display: flex;
+	flex-direction: row;
+	box-sizing: border-box;
+}
+
+#products-list-header
+{
+	display: flex;
+	flex-direction: row;
+    align-items: center;
+    justify-content:space-between;
+}
+
+#products > section
+{
+	box-sizing: border-box;
+	flex-basis: 25%;
+	flex-shrink: 1;
+	padding-right: 12px;
+}
+
+#products > article
+{
+	display: flex;
+	flex-direction: column;
+	flex-shrink: 3;
+	flex-basis: 75%;
+	justify-content: flex-start;
+}
+
+#products-list
+{
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	grid-gap: 12px 12px;
+	max-width: 100%;
+}
+
+#products-list a
+{
+	box-sizing: border-box;
+	border: 1px solid #999999;
+	border-radius: 4px;
+	padding: 10px;
+}
+
+#products-list a
+{
+	text-decoration: none;
+	color: black;
+}
+
+#products-list a h2
+{
+	margin: 0;
+}
+
+#products-list a p
+{
+	margin: 0;
+	text-align: right;
+}
+
+#products-list a img
+{
+	max-width: 100%;
+}
+
+#products-list > a:hover
+{
+	background-color: #f3f3f3;
+	transition: background-color 0.2s ease-out;
+}
+/* Panneau principal End */
+/* Products CSS End*/
+
+/* Le heading semblait trop grand */
+h2
+{
+	font-size: 1.2em;
 }
