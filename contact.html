@@ -8,38 +8,48 @@
 </head>
 <body>
   <header>
-    <a href="./index.html">
-      <img alt="logo" src="./assets/img/logo.svg" title="Accueil">
-    </a>
-    <nav>
-      <ul>
-        <li><a href="./index.html">Accueil</a></li>
-        <li><a href="./products.html">Produits</a></li>
-        <li><a href="./contact.html">Contact</a></li>
-        <li><a href="./shopping-cart.html">Panier</a></li>
-      </ul>
-    </nav>
+    <div>
+      <a href="./index.html">
+        <img alt="logo" src="./assets/img/logo.svg" title="Accueil">
+      </a>
+      <nav>
+        <ul>
+          <li><a href="./index.html">Accueil</a></li>
+          <li><a href="./products.html">Produits</a></li>
+          <li><a class="active" href="./contact.html">Contact</a></li>
+          <li><a class="shopping-cart" href="./shopping-cart.html" title="Panier">
+            <span class="fa-stack fa-lg">
+              <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
+              <i class="fa fa-shopping-cart fa-stack-1x"></i>
+            </span>
+            <span class="count w3-badge w3-red">3</span>
+          </a></li>
+        </ul>
+      </nav>
+    </div>
   </header>
   <main>
-    <article>
+    <article class="flex-column">
       <h1>Contact</h1>
       <p>Si vous souhaitez contacter <em>OnlineShop</em>, veuillez utiliser les coordonnées suivantes.</p>
-      <section>
-        <h2>Téléphone</h2>
-        <a href="tel:5143404711">(514) 340-4711</a>
-      </section>
-      <section>
-        <h2>Adresse</h2>
-        <p>
-          2900, boul. Édouard-Montpetit<br>
-          Montréal (Québec)<br>
-          H3T 1J4
-        </p>
-      </section>
-      <section>
-        <h2>Adresse courriel</h2>
-        <a href="mailto:onlineshop@polymtl.ca">onlineshop@polymtl.ca</a>
-      </section>
+      <div class="flex-row-justified rounded-border contact-info">
+        <section>
+          <h2><i class="fa fa-mobile contact-big-icon"></i></h2>
+          <a href="tel:5143404711">(514) 340-4711</a>
+        </section>
+        <section>
+          <h2><i class="fa fa-map-marker contact-big-icon"></i></h2>
+          <p>
+            2900, boul. Édouard-Montpetit<br>
+            Montréal (Québec)<br>
+            H3T 1J4
+          </p>
+        </section>
+        <section>
+          <h2><i class="fa fa-envelope contact-big-icon"></i></h2>
+          <a href="mailto:onlineshop@polymtl.ca">onlineshop@polymtl.ca</a>
+        </section>
+      </div>
     </article>
   </main>
   <footer>

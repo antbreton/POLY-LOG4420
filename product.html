@@ -29,11 +29,11 @@
   </div>
 </header>
   <main id="product">
-    <article>
+    <article class="flex-column">
       <h1>Manette Xbox 360</h1>
       <div class="two-even-columns">
-        <img alt="Manette Xbox 360" src="./assets/img/xbox-controller.png">
-        <div class="flex-vertical">
+        <div><img alt="Manette Xbox 360" src="./assets/img/xbox-controller.png"></div>
+        <div class="flex-column">
           <section>
             <h2>Description</h2>
             <p>Manette pouvant être branchée à une console Xbox 360 et un PC. Cette manette vous permettra de jouer à vos jeux vidéo préférés. 
@@ -52,7 +52,7 @@
             <p>Prix: <strong>29,99&thinsp;$</strong></p>
             <form>
               <label for="product-quantity">Quantité:</label>
-              <input type="number" value="1" min="1" id="product-quantity">
+              <input class="rounded-border" type="number" value="1" min="1" id="product-quantity">
               <button class="btn" title="Ajouter au panier" type="submit">
                 <i class="fa fa-cart-plus"></i> Ajouter
               </button>
