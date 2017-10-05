@@ -377,3 +377,34 @@ h2 {
 
 
 /* Shopping cart end */
+
+
+/* Order begin */
+
+#order-article>div {
+    width: 100%
+}
+
+#order-article .col-50 label {
+    font-weight: bold;
+}
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.col-50 {
+    width: 49%;
+}
+
+.col-50 input {
+    width: 97%
+}
+
+#order-payer {
+    float: right;
+}
+
+
+/*order end */
