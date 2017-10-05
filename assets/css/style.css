@@ -339,10 +339,8 @@ h2 {
 
 #shopping-cart table button {
     background-color: #dddddd;
-    border-radius: 50%;
     border: none;
-    height: 20px;
-    width: 20px;
+    border-radius: 50%;
 }
 
 #shopping-cart table+p {
@@ -363,7 +361,6 @@ h2 {
 
 #shopping-cart table button:hover {
     background-color: #bbbbbb;
-    border-radius: 100%;
 }
 
 #order {
