@@ -70,7 +70,7 @@ header img {
 }
 
 main {
-    min-height: calc(100vh - 70px);
+    min-height: calc(100vh - 112px);
     max-width: 1200px;
     margin: auto;
     /* Equal to height of footer */
@@ -405,3 +405,18 @@ h2 {
 
 
 /*order end */
+
+/* Toast */
+
+.toast {
+    position: fixed;
+    bottom: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #383838;
+    color: #f0f0f0;
+    font-size: 20px;
+    padding: 5px 10px;
+    text-align: center;
+    border-radius: 4px;
+}
