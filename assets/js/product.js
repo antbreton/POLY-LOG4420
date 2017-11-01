@@ -35,7 +35,7 @@ $(document).ready(() => {
         var product = $("#product").data("product");
 
         // TODO: Add produit dans localStorage
-        
+        addToCart(product.id, quantity);
         // TODO: Update count dans localStorage
 
         // TODO: Update badge with updated count
@@ -47,6 +47,37 @@ $(document).ready(() => {
         return false;
     });
 });
+
+function addToCart(id, qte)
+{
+	// get Cart in local storage
+	var cartJsonString = localStorage.getItem("cart");
+	
+	// Si le panier n'a pas encore été ajouté au local storage, on le crée
+	if(cartJsonString==null)
+		cartJsonString = '{"products":[]}';
+	
+	// on crée un objet JSON
+	var cart = JSON.parse(cartJsonString);
+	
+	// vérifier si l'id existe déjà
+	if(getById(cart.products,id) != undefined) // on ajoute la qté
+		getById(cart.products,id).qte+= qte;
+	else // s'il n'existe pas, on push le nouvel article
+		cart.products.push({id,qte});	 
+		
+	// on crée le json string et on l'ajoute au localStorage
+	localStorage.setItem("cart",JSON.stringify(cart));
+}
+
+function getById(arr, id) {
+    for (var d = 0, len = arr.length; d < len; d += 1) {
+        if (arr[d].id === id) {
+            return arr[d];
+        }
+    }
+    return null;
+}
 
 function toast(text) {
     $("#dialog").text(text).slideDown(450).delay(5000).slideUp(450);

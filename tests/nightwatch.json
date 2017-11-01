@@ -14,7 +14,7 @@
     "log_path" : "",
     "port" : 4444,
     "cli_args" : {
-      "webdriver.chrome.driver" : "./tests/bin/chromedriver.exe"
+      "webdriver.chrome.driver" : "./tests/bin/chromedriver"
     }
   },
 
@@ -33,10 +33,7 @@
         "browserName": "chrome",
         "javascriptEnabled": true,
         "acceptSslCerts": true,
-        "marionette": true,
-        "chromeOptions": {
-           "binary": "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe"
-        }
+        "marionette": true
       }
     }
   }
