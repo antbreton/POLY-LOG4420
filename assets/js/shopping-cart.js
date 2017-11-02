@@ -1,6 +1,7 @@
+
 $(document).ready(() => {
 
-	//
+	
 });
 
 var productsInformatations;
@@ -17,7 +18,7 @@ function computeCart()
 		var cart = JSON.parse(localStorage.getItem("cart"));
 		
 		// If its empty, then display a message
-		if(cart.products.length == 0)
+		if(!cart || cart.products.length == 0)
 		{
 			document.getElementById("shopping-cart").innerHTML="<h1>Panier</h1><p>Aucun produit dans le panier.</p>";
 			return;
@@ -43,7 +44,7 @@ function computeCart()
 			var tableRow="";
 			tableRow+='<tr><td><button class="remove-item-button" onclick="deleteFromCart('+productsInCart[i].p.id+')">X</button></td>'
 			+'<td><a href="./product.html?id='+productsInCart[i].p.id+'">'+productsInCart[i].p.name+'</a></td>'
-			+'<td class="price">'+productsInCart[i].p.price+'&thinsp;$</td>';
+			+'<td>'+productsInCart[i].p.price.toLocaleString("fr-CA", {useGrouping: false, minimumFractionDigits: 2, maximumFractionDigits: 2}) + '$</td>';
 			
 			// Si la qte est 1 le bouton est disable
 			if(productsInCart[i].qte == 1)
@@ -52,7 +53,7 @@ function computeCart()
 				tableRow+='<td><button class="remove-quantity-button" onclick="updateQteInCart('+productsInCart[i].p.id+','+(productsInCart[i].qte-1)+')">-</button>';	
 							
 			tableRow+='<span class="quantity" >'+productsInCart[i].qte+'</span>'
-			+'<button class="add-quantity-button" onclick="updateQteInCart('+productsInCart[i].p.id+','+(parseInt(productsInCart[i].qte)+1)+')">+</button></td><td id="total-amount">'+(productsInCart[i].p.price*productsInCart[i].qte).toFixed(2);+'&thinsp;$</td></tr>';
+			+'<button class="add-quantity-button" onclick="updateQteInCart('+productsInCart[i].p.id+','+(parseInt(productsInCart[i].qte)+1)+')">+</button></td><td class="price">'+(productsInCart[i].p.price*productsInCart[i].qte).toLocaleString("fr-CA", {useGrouping: false, minimumFractionDigits: 2, maximumFractionDigits: 2}) + '$</td></tr>';
 			
 			document.getElementById('products-tbody').innerHTML+=tableRow;
 			
@@ -60,7 +61,7 @@ function computeCart()
 		}
 		
 		// display total amount
-		$("#total-order-amount").html(totalOrderAmount.toFixed(2)+"&thinsp;$");
+		$("#total-amount").html(totalOrderAmount.toLocaleString("fr-CA", {useGrouping: false, minimumFractionDigits: 2, maximumFractionDigits: 2}) + '$');
 }	
 
 function deleteFromCart(id)
@@ -83,6 +84,7 @@ function deleteFromCart(id)
 	
 		// On met à jour le panier
 		computeCart();
+		computeBadge();	
 	}
 }
 
@@ -109,6 +111,7 @@ function updateQteInCart(id, qte)
 	
 	// On met à jour le panier
 	computeCart();
+	computeBadge();	
 }
 
 function getById(arr, id) {
@@ -130,9 +133,12 @@ function clearCart()
 	
 		// On met à jour le panier
 		computeCart();
+
+		// On met a jour le badge
+		computeBadge();
 	}
 }
 
 function sortByName(key1, key2){
-   return key1.p.name > key2.p.name;
+   return key1.p.name.toLowerCase() > key2.p.name.toLowerCase();
 }

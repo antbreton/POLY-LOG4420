@@ -36,9 +36,9 @@ $(document).ready(() => {
 
         // TODO: Add produit dans localStorage
         addToCart(product.id, quantity);
-        // TODO: Update count dans localStorage
 
         // TODO: Update badge with updated count
+ 	computeBadge();
 
         // Toast Dialog
         toast('Ajout de ' + quantity + ' "' + product.name + '" dans le panier.');

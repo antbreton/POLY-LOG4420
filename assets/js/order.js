@@ -6,24 +6,27 @@ $.validator.addMethod(
         },
         "Please check your input."
 );
-/*
-$("#order-form").validate({
-  rules: {
-  	credit-card: {
-  		regex: "^[0-9]{4}\ ?[0-9]{4}\ ?[0-9]{4}\ ?[0-9]{4}$" },
-    phone: {
-      required: true,
-      phoneUS: true
-    }
-  }
-});
-*/
-
-
 
 $(document).ready(() => {
 
 $("#order-form").validate({
+  submitHandler: function(form) {
+    // do other things for a valid form
+    // save command id
+    var orderNum = localStorage.getItem("orderNum");
+	
+		if(orderNum==null)
+			orderNum= 0;
+		else
+			orderNum=parseInt(orderNum);
+		
+    orderNum++;
+    
+		localStorage.setItem("orderNum",orderNum);
+    form.action="./confirmation.html?name="+document.getElementById("first-name").value+" "+document.getElementById("last-name").value+"&orderNum="+orderNum;
+
+    form.submit();
+  },
   rules: {
     // simple rule, converted to {required:true}
     'credit-card':{
@@ -55,11 +58,11 @@ $("#order-form").validate({
   messages: {
   	'credit-card':
   	{ 
-  		regex:"Le format de votre numéro de carte est invalide." 
+  		regex:"Veuillez fournir un numéro de carte de crédit valide." 
   	},
   	'credit-card-expiry':
   	{ 
-  		regex:"La date d’expiration de votre carte de crédit est invalide." 
+  		regex:"La date d'expiration de votre carte de crédit est invalide." 
   	}
   }
 });
