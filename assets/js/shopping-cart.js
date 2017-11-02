@@ -42,7 +42,7 @@ function computeCart()
 		{
 			var tableRow="";
 			tableRow+='<tr><td><button class="remove-item-button" onclick="deleteFromCart('+productsInCart[i].p.id+')">X</button></td>'
-			+'<td><a href="./product.html">'+productsInCart[i].p.name+'</a></td>'
+			+'<td><a href="./product.html?id='+productsInCart[i].p.id+'">'+productsInCart[i].p.name+'</a></td>'
 			+'<td class="price">'+productsInCart[i].p.price+'&thinsp;$</td>';
 			
 			// Si la qte est 1 le bouton est disable
