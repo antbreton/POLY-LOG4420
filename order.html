@@ -6,6 +6,12 @@
     <title>OnlineShop - Commande</title>
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+    <script type="text/javascript" src="./assets/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="./assets/js/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="./assets/js/additional-methods.min.js"></script>
+		<script type="text/javascript" src="./assets/js/messages_fr.js"></script>
+  	<script type="text/javascript" src="./assets/js/entete.js"></script>
+  	<script type="text/javascript" src="./assets/js/order.js"></script>
 
     <body>
         <header>
@@ -41,7 +47,7 @@
                             <div class="flex">
                                 <div class="col-50">
                                     <label for="first-name">Prénom</label><br>
-                                    <input id="first-name" name="first-name" type="text" placeholder="Prénom" required><br>
+                                    <input id="first-name" name="first-name"  type="text" placeholder="Prénom" ><br>
 
                                     <label for="email">Adresse courriel</label><br>
                                     <input id="email" name="email" type="email" placeholder="Adresse courriel" required>
@@ -49,10 +55,10 @@
 
                                 <div class="col-50">
                                     <label for="last-name">Nom</label><br>
-                                    <input id="last-name" name="last-name" type="text" placeholder="Nom" required><br>
+                                    <input id="last-name" name="last-name" minlength="2" type="text" placeholder="Nom" ><br>
 
                                     <label for="phone">Téléphone</label><br>
-                                    <input id="phone" name="phone" type="tel" placeholder="###-###-####" required>
+                                    <input id="phone" name="phone" placeholder="###-###-####">
                                 </div>
                             </div>
                         </section>
@@ -61,7 +67,7 @@
                             <div class="flex">
                                 <div class="col-50">
                                     <label for="credit-card">Numéro de carte de crédit</label><br>
-                                    <input id="credit-card" name="credit-card" type="text" placeholder="•••• •••• •••• ••••" required>
+                                    <input id="credit-card" name="credit-card" type="text" placeholder="•••• •••• •••• ••••" >
                                 </div>
                                 <div class="col-50">
                                     <label for="credit-card-expiry">Expiration (mm/aa)</label><br>

@@ -1,26 +1,28 @@
-19:31:54.781 INFO - Selenium build info: version: '3.4.0', revision: 'unknown'
-19:31:54.781 INFO - Launching a standalone Selenium Server
-2017-11-01 19:31:54.800:INFO::main: Logging initialized @234ms to org.seleniumhq.jetty9.util.log.StdErrLog
-19:31:54.847 INFO - Driver provider org.openqa.selenium.ie.InternetExplorerDriver registration is skipped:
+00:44:23.221 INFO - Selenium build info: version: '3.4.0', revision: 'unknown'
+00:44:23.221 INFO - Launching a standalone Selenium Server
+2017-11-02 00:44:23.236:INFO::main: Logging initialized @197ms to org.seleniumhq.jetty9.util.log.StdErrLog
+00:44:23.278 INFO - Driver provider org.openqa.selenium.ie.InternetExplorerDriver registration is skipped:
  registration capabilities Capabilities [{ensureCleanSession=true, browserName=internet explorer, version=, platform=WINDOWS}] does not match the current platform LINUX
-19:31:54.847 INFO - Driver provider org.openqa.selenium.edge.EdgeDriver registration is skipped:
+00:44:23.278 INFO - Driver provider org.openqa.selenium.edge.EdgeDriver registration is skipped:
  registration capabilities Capabilities [{browserName=MicrosoftEdge, version=, platform=WINDOWS}] does not match the current platform LINUX
-19:31:54.847 INFO - Driver class not found: com.opera.core.systems.OperaDriver
-19:31:54.848 INFO - Driver provider com.opera.core.systems.OperaDriver registration is skipped:
+00:44:23.279 INFO - Driver class not found: com.opera.core.systems.OperaDriver
+00:44:23.279 INFO - Driver provider com.opera.core.systems.OperaDriver registration is skipped:
 Unable to create new instances on this machine.
-19:31:54.848 INFO - Driver class not found: com.opera.core.systems.OperaDriver
-19:31:54.848 INFO - Driver provider com.opera.core.systems.OperaDriver is not registered
-19:31:54.849 INFO - Driver provider org.openqa.selenium.safari.SafariDriver registration is skipped:
+00:44:23.279 INFO - Driver class not found: com.opera.core.systems.OperaDriver
+00:44:23.279 INFO - Driver provider com.opera.core.systems.OperaDriver is not registered
+00:44:23.280 INFO - Driver provider org.openqa.selenium.safari.SafariDriver registration is skipped:
  registration capabilities Capabilities [{browserName=safari, version=, platform=MAC}] does not match the current platform LINUX
-2017-11-01 19:31:54.888:INFO:osjs.Server:main: jetty-9.4.3.v20170317
-2017-11-01 19:31:54.919:INFO:osjsh.ContextHandler:main: Started o.s.j.s.ServletContextHandler@42d80b78{/,null,AVAILABLE}
-2017-11-01 19:31:54.934:INFO:osjs.AbstractConnector:main: Started ServerConnector@2f686d1f{HTTP/1.1,[http/1.1]}{0.0.0.0:4444}
-2017-11-01 19:31:54.935:INFO:osjs.Server:main: Started @370ms
-19:31:54.935 INFO - Selenium Server is up and running
-19:31:55.178 INFO - SessionCleaner initialized with insideBrowserTimeout 0 and clientGoneTimeout 1800000 polling every 180000
-19:31:55.203 INFO - Executing: [new session: Capabilities [{acceptSslCerts=true, marionette=true, name=1 Products, browserName=chrome, javascriptEnabled=true, platform=ANY}]])
-19:31:55.231 INFO - Creating a new session for Capabilities [{acceptSslCerts=true, marionette=true, name=1 Products, browserName=chrome, javascriptEnabled=true, platform=ANY}]
-19:31:55.238 WARN - Exception thrown
+2017-11-02 00:44:23.313:INFO:osjs.Server:main: jetty-9.4.3.v20170317
+2017-11-02 00:44:23.344:INFO:osjsh.ContextHandler:main: Started o.s.j.s.ServletContextHandler@42d80b78{/,null,AVAILABLE}
+2017-11-02 00:44:23.356:INFO:osjs.AbstractConnector:main: Started ServerConnector@2f686d1f{HTTP/1.1,[http/1.1]}{0.0.0.0:4444}
+2017-11-02 00:44:23.357:INFO:osjs.Server:main: Started @318ms
+00:44:23.357 INFO - Selenium Server is up and running
+00:44:23.583 INFO - SessionCleaner initialized with insideBrowserTimeout 0 and clientGoneTimeout 1800000 polling every 180000
+00:44:23.605 INFO - Executing: [new session: Capabilities [{acceptSslCerts=true, marionette=true, name=1 Products, browserName=chrome, javascriptEnabled=true, platform=ANY}]])
+00:44:23.630 INFO - Creating a new session for Capabilities [{acceptSslCerts=true, marionette=true, name=1 Products, browserName=chrome, javascriptEnabled=true, platform=ANY}]
+/home/antoine/Documents/POLY/POLY-LOG4420/tests/bin/chromedriver: error while loading shared libraries: libnss3.so: cannot open shared object file: No such file or directory
+00:44:43.859 ERROR - org.apache.commons.exec.ExecuteException: Process exited with an error: 127 (Exit value: 127)
+00:44:43.861 WARN - Exception thrown
 java.util.concurrent.ExecutionException: org.openqa.selenium.WebDriverException: java.lang.reflect.InvocationTargetException
 Build info: version: '3.4.0', revision: 'unknown', time: 'unknown'
 System info: host: 'antoine-X751LX', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '4.4.0-97-generic', java.version: '1.8.0_131'
@@ -80,14 +82,30 @@ Caused by: java.lang.reflect.InvocationTargetException
 	at java.lang.reflect.Constructor.newInstance(Constructor.java:423)
 	at org.openqa.selenium.remote.server.DefaultDriverProvider.callConstructor(DefaultDriverProvider.java:102)
 	... 9 more
-Caused by: java.lang.IllegalStateException: The driver is not executable: /home/antoine/Documents/POLY/POLY-LOG4420/./tests/bin/chromedriver
-	at com.google.common.base.Preconditions.checkState(Preconditions.java:518)
-	at org.openqa.selenium.remote.service.DriverService.checkExecutable(DriverService.java:140)
-	at org.openqa.selenium.remote.service.DriverService.findExecutable(DriverService.java:131)
-	at org.openqa.selenium.chrome.ChromeDriverService.access$000(ChromeDriverService.java:32)
-	at org.openqa.selenium.chrome.ChromeDriverService$Builder.findDefaultExecutable(ChromeDriverService.java:137)
-	at org.openqa.selenium.remote.service.DriverService$Builder.build(DriverService.java:330)
-	at org.openqa.selenium.chrome.ChromeDriverService.createDefaultService(ChromeDriverService.java:88)
+Caused by: org.openqa.selenium.WebDriverException: Timed out waiting for driver server to start.
+Build info: version: '3.4.0', revision: 'unknown', time: 'unknown'
+System info: host: 'antoine-X751LX', ip: '127.0.1.1', os.name: 'Linux', os.arch: 'amd64', os.version: '4.4.0-97-generic', java.version: '1.8.0_131'
+Driver info: driver.version: ChromeDriver
+	at org.openqa.selenium.remote.service.DriverService.waitUntilAvailable(DriverService.java:193)
+	at org.openqa.selenium.remote.service.DriverService.start(DriverService.java:181)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:78)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:637)
+	at org.openqa.selenium.remote.RemoteWebDriver.startSession(RemoteWebDriver.java:250)
+	at org.openqa.selenium.remote.RemoteWebDriver.startSession(RemoteWebDriver.java:236)
+	at org.openqa.selenium.remote.RemoteWebDriver.<init>(RemoteWebDriver.java:137)
+	at org.openqa.selenium.chrome.ChromeDriver.<init>(ChromeDriver.java:184)
 	at org.openqa.selenium.chrome.ChromeDriver.<init>(ChromeDriver.java:148)
 	... 14 more
-19:31:55.243 WARN - Exception: The driver is not executable: /home/antoine/Documents/POLY/POLY-LOG4420/./tests/bin/chromedriver
+Caused by: org.openqa.selenium.net.UrlChecker$TimeoutException: Timed out waiting for [http://localhost:4344/status] to be available after 20006 ms
+	at org.openqa.selenium.net.UrlChecker.waitUntilAvailable(UrlChecker.java:107)
+	at org.openqa.selenium.remote.service.DriverService.waitUntilAvailable(DriverService.java:190)
+	... 22 more
+Caused by: com.google.common.util.concurrent.UncheckedTimeoutException: java.util.concurrent.TimeoutException
+	at com.google.common.util.concurrent.SimpleTimeLimiter.callWithTimeout(SimpleTimeLimiter.java:140)
+	at org.openqa.selenium.net.UrlChecker.waitUntilAvailable(UrlChecker.java:80)
+	... 23 more
+Caused by: java.util.concurrent.TimeoutException
+	at java.util.concurrent.FutureTask.get(FutureTask.java:205)
+	at com.google.common.util.concurrent.SimpleTimeLimiter.callWithTimeout(SimpleTimeLimiter.java:128)
+	... 24 more
+00:44:43.878 WARN - Exception: null

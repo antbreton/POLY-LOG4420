@@ -7,7 +7,7 @@
 6 silly lifecycle log4420-a17@1.0.0~pree2e: no script for pree2e, continuing
 7 info lifecycle log4420-a17@1.0.0~e2e: log4420-a17@1.0.0
 8 verbose lifecycle log4420-a17@1.0.0~e2e: unsafe-perm in lifecycle true
-9 verbose lifecycle log4420-a17@1.0.0~e2e: PATH: /usr/share/npm/bin/node-gyp-bin:/home/antoine/Documents/POLY/POLY-LOG4420/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+9 verbose lifecycle log4420-a17@1.0.0~e2e: PATH: /usr/share/npm/bin/node-gyp-bin:/home/antoine/Documents/POLY/POLY-LOG4420/node_modules/.bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bin
 10 verbose lifecycle log4420-a17@1.0.0~e2e: CWD: /home/antoine/Documents/POLY/POLY-LOG4420
 11 silly lifecycle log4420-a17@1.0.0~e2e: Args: [ '-c', 'nightwatch --config ./tests/nightwatch.json' ]
 12 silly lifecycle log4420-a17@1.0.0~e2e: Returned: code: 1  signal: null
