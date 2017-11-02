@@ -62,7 +62,7 @@ function addToCart(id, qte)
 	
 	// vérifier si l'id existe déjà
 	if(getById(cart.products,id) != undefined) // on ajoute la qté
-		getById(cart.products,id).qte+= qte;
+		getById(cart.products,id).qte=parseInt(getById(cart.products,id).qte)+parseInt(qte);
 	else // s'il n'existe pas, on push le nouvel article
 		cart.products.push({id,qte});	 
 		

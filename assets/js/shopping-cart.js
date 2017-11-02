@@ -36,13 +36,14 @@ function computeCart()
 		
 		document.getElementById('products-tbody').innerHTML="";
 
+		var totalOrderAmount = 0;
 		// Afficher le panier
 		for(var i = 0; i<productsInCart.length;i++)
 		{
 			var tableRow="";
 			tableRow+='<tr><td><button class="remove-item-button" onclick="deleteFromCart('+productsInCart[i].p.id+')">X</button></td>'
 			+'<td><a href="./product.html">'+productsInCart[i].p.name+'</a></td>'
-			+'<td class="price">'+productsInCart[i].p.price+' $</td>';
+			+'<td class="price">'+productsInCart[i].p.price+'&thinsp;$</td>';
 			
 			// Si la qte est 1 le bouton est disable
 			if(productsInCart[i].qte == 1)
@@ -51,10 +52,15 @@ function computeCart()
 				tableRow+='<td><button class="remove-quantity-button" onclick="updateQteInCart('+productsInCart[i].p.id+','+(productsInCart[i].qte-1)+')">-</button>';	
 							
 			tableRow+='<span class="quantity" >'+productsInCart[i].qte+'</span>'
-			+'<button class="add-quantity-button" onclick="updateQteInCart('+productsInCart[i].p.id+','+(parseInt(productsInCart[i].qte)+1)+')">+</button></td><td id="total-amount">'+(productsInCart[i].p.price*productsInCart[i].qte).toFixed(2);+' $</td></tr>';
+			+'<button class="add-quantity-button" onclick="updateQteInCart('+productsInCart[i].p.id+','+(parseInt(productsInCart[i].qte)+1)+')">+</button></td><td id="total-amount">'+(productsInCart[i].p.price*productsInCart[i].qte).toFixed(2);+'&thinsp;$</td></tr>';
 			
 			document.getElementById('products-tbody').innerHTML+=tableRow;
+			
+			totalOrderAmount+=(productsInCart[i].p.price*productsInCart[i].qte);
 		}
+		
+		// display total amount
+		$("#total-order-amount").html(totalOrderAmount.toFixed(2)+"&thinsp;$");
 }	
 
 function deleteFromCart(id)
