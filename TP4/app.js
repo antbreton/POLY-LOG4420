@@ -9,7 +9,11 @@ var session = require("express-session");
 require("./lib/db");
 var index = require("./routes/index");
 var produits = require("./routes/produits");
+<<<<<<< HEAD
 var orders = require("./routes/orders");
+=======
+var panier = require("./routes/panier");
+>>>>>>> 9698dc7c0f83fe4c978e7acb6105f9b92e84793e
 
 var app = express();
 
@@ -27,7 +31,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-
 // initialize the session
 app.use(session({
   secret: 'log4420',
@@ -39,7 +42,11 @@ app.use(session({
 // Bind our APIs
 app.use("/", index);
 app.use("/", produits);
+<<<<<<< HEAD
 app.use("/", orders);
+=======
+app.use("/", panier);
+>>>>>>> 9698dc7c0f83fe4c978e7acb6105f9b92e84793e
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
