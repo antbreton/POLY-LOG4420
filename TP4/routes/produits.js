@@ -115,7 +115,6 @@ routerP.post("/api/products/", function(req, res) {
 	// Verify id on insert
 	//
 	// Verify name
-	console.log(req.body);
 	if (!req.body.name || req.body.name.constructor != String || req.body.name == "") {
 		res.sendStatus(400);
 		return;
@@ -163,7 +162,6 @@ routerP.post("/api/products/", function(req, res) {
 		"description":req.body.description,
 		"features":req.body.features,
 	});
-
 	p.save((err, savedp) => {
 		if (err) {
 			if (err.code == 11000) {
