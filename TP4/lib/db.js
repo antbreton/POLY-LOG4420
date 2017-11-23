@@ -23,7 +23,7 @@ var Product = new Schema({
   features: Array
 }, { versionKey: false });
 
-module.exports.Order = mongoose.model("Order", Order);
+module.exports.Orders = mongoose.model("Order", Order);
 module.exports.Products = mongoose.model("Product", Product);
 
 mongoose.Promise = global.Promise;

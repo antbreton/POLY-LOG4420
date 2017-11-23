@@ -9,6 +9,7 @@ var session = require("express-session");
 require("./lib/db");
 var index = require("./routes/index");
 var produits = require("./routes/produits");
+var orders = require("./routes/orders");
 
 var app = express();
 
@@ -35,10 +36,10 @@ app.use(session({
   cookie: { secure: false }
 }));
 
-app.use("/", index);
-
 // Bind our APIs
+app.use("/", index);
 app.use("/", produits);
+app.use("/", orders);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
