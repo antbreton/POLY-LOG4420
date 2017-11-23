@@ -82,83 +82,62 @@ routerP.post("/api/shopping-cart/", function(req, res) {
 });
 
 // Antoine
+//4
 routerP.put("/api/shopping-cart/:productId", function(req, res) {
 
     if (!req.body.hasOwnProperty("quantity"))
         res.status(400).send('{"error":"missing quantity"}');
-    else
-        next();
-}, function(req, res) {
+    else {
+        var cp = req.session.shopping_cart.find((current) => {
+            if (current.productId == req.params.productId) {
+                return true;
+            }
+            return false;
+        });
+
+        if (!cp) {
+            res.sendStatus(404);
+        } else {
+            console.log(req.body.quantity);
+            cp.quantity = req.body.quantity;
+            res.sendStatus(204);
+        }
+    }
+});
+
+//5
+routerP.delete("/api/shopping-cart/:productId", function(req, res) {
+    if (!req.params.hasOwnProperty("productId"))
+        res.status(400).send('{"error":"missing productId"}');
+    else {
+        // get the shopping-cart in db
+        var cp = req.session.shopping_cart.find((current) => {
+            if (current.productId == req.params.productId) {
+                return true;
+            }
+            return false;
+        });
+
+        if (!cp) {
+            res.sendStatus(404);
+        } else {
+            for (var i = 0; i < req.session.shopping_cart.length; i++) {
+                var cur = req.session.shopping_cart[i];
+                if (cur.productId == req.params.productId) {
+                    req.session.shopping_cart.splice(i, 1);
+                    break;
+                }
+            }
+            res.sendStatus(204);
+        }
+    }
+});
+
+//6
+routerP.delete("/api/shopping-cart/", function(req, res) {
     // get the shopping-cart in db
-    panier.findById(1, function(err, user) {
-        if (err)
-            res.status(504).send('{"error":"missing fetching the cart"}');
-        else {
-
-            //find product in cart product list
-            if (!panier.products(req.params.productId)) {
-                res.status(404).send('{"error":"Product does not exist in cart"}');
-            } else {
-                panier.products(req.params.productId).quantity = res.param.quantity;
-                panier.save(function(err) {
-                    if (err)
-                        res.status(504).send('{"error":"unable to sabe the cart"}');
-                    else
-                        res.status(204).send('{"status":"ok"}');
-                });
-            }
-        }
-    });
-});
-
-routerP.delete("/api/shopping-cart/:productId", function(req, res) {
-    panier.findById(1, function(err, user) {
-        if (err)
-            res.status(504).send('{"error":"missing fetching the cart"}');
-        else {
-
-            //find product in cart product list
-            if (!panier.product(req.params.productId)) {
-                res.status(404).send('{"error":"Product does not exist in cart"}');
-            } else {
-                // Remove product in the cart
-                panier.products(req.params.productId);
-
-                panier.save(function(err) {
-                    if (err)
-                        res.status(504).send('{"error":"unable to sabe the cart"}');
-                    else
-                        res.status(204).send('{"status":"ok"}');
-                });
-
-            }
-        }
-    });
-});
-
-routerP.delete("/api/shopping-cart/:productId", function(req, res) {
-    panier.findById(1, function(err, user) {
-        if (err)
-            res.status(504).send('{"error":"missing fetching the cart"}');
-        else {
-
-            //find product in cart product list
-            if (!panier.product(req.params.productId)) {
-                res.status(404).send('{"error":"Product does not exist in cart"}');
-            } else {
-                // Remove all products
-                panier.products = [];
-
-                panier.save(function(err) {
-                    if (err)
-                        res.status(504).send('{"error":"unable to sabe the cart"}');
-                    else
-                        res.status(204).send('{"status":"ok"}');
-                });
-
-            }
-        }
-    });
+    req.session.shopping_cart = [];
+    res.sendStatus(204);
 });
 
 
