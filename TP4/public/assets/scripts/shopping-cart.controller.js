@@ -16,12 +16,14 @@ var onlineShop = onlineShop || {};
      */
     function _updateCount() {
         var itemsCount = shoppingCartService.getItemsCount();
-        var countElement = $(".shopping-cart").find(".count");
-        if (itemsCount > 0) {
-            countElement.addClass("visible").text(itemsCount);
-        } else {
-            countElement.removeClass("visible");
-        }
+	itemsCount.done(function(a) {
+		var countElement = $(".shopping-cart").find(".count");
+		if (a > 0) {
+		    countElement.addClass("visible").text(a);
+		} else {
+		    countElement.removeClass("visible");
+		}
+	});
     }
 
     /**
@@ -115,7 +117,7 @@ var onlineShop = onlineShop || {};
     // Initializes the shopping cart.
     $("#add-to-cart-form").submit(function(event) {
         event.preventDefault();
-        var productId = $(this).attr("data-product-id");
+        var productId = parseInt($(this).attr("data-product-id"));
         shoppingCartService.addItem(productId, +$(this).find("input").val());
 
         var dialog = $("#dialog");

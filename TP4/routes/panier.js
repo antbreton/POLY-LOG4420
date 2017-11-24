@@ -48,6 +48,17 @@ routerP.post("/api/shopping-cart/", function(req, res) {
     }
 
     // Verify productId on db insert
+	console.log(req.body);
+	if (!req.body.productId || req.body.productId.constructor != Number) {
+		res.sendStatus(400);
+		return;
+	}
+            // Verify quantity
+    if (!req.body.quantity || req.body.quantity.constructor != Number || req.body.quantity <= 0) {
+        res.sendStatus(400);
+        return;
+    }
+
     var checkExistence = (err, p) => {
         if (err) {
             console.log("Erreur lors du db.findOne : " + err);
@@ -55,11 +66,6 @@ routerP.post("/api/shopping-cart/", function(req, res) {
             return;
         }
         if (p) {
-            // Verify quantity
-            if (!req.body.quantity || req.body.quantity.constructor != Number || req.body.quantity <= 0) {
-                res.sendStatus(400);
-                return;
-            }
 
             var matchingCartProduct = (current) => {
                 if (current.productId == req.body.productId) {
@@ -85,8 +91,10 @@ routerP.post("/api/shopping-cart/", function(req, res) {
 //4
 routerP.put("/api/shopping-cart/:productId", function(req, res) {
 
-    if (!req.body.hasOwnProperty("quantity"))
+    if (!req.body.quantity || req.body.quantity.constructor != Number || req.body.quantity <= 0) {
         res.status(400).send('{"error":"missing quantity"}');
+        return;
+    }
     else {
         var cp = req.session.shopping_cart.find((current) => {
             if (current.productId == req.params.productId) {

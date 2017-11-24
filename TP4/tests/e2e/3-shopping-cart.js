@@ -125,6 +125,7 @@ function validateTotalAmount(client, productsList) {
  */
 function validateShoppingCartWithAPI(client, productsList) {
   client.reqGet("http://localhost:8000/api/shopping-cart", function(err, response) {
+	console.log(response);
     if (!err) {
       var isValid = productsList.length === 0 || response.length === productsList.length &&
         response.every(function(item) {

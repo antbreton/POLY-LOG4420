@@ -27,10 +27,9 @@ routerP.get("/api/products/", function(req, res) {
 			res.send(err);
 			return;
 		}
-
 		switch (req.query.criteria) {
 			case "alpha-asc":
-				productsR.sort((a,b) => {
+				productsR.sort(function(a,b){
 					var p1 = a.name.toLowerCase(), p2 = b.name.toLowerCase();
 					if (p1 > p2) return 1;
 					if (p1 < p2) return -1;
@@ -38,7 +37,7 @@ routerP.get("/api/products/", function(req, res) {
 				}); 
 				break;
 			case "alpha-dsc": 
-				productsR.sort((a,b) => {
+				productsR.sort(function(a,b) {
 					var p1 = a.name.toLowerCase(), p2 = b.name.toLowerCase();
 					if (p1 > p2) return -1;
 					if (p1 < p2) return 1;
@@ -46,14 +45,14 @@ routerP.get("/api/products/", function(req, res) {
 				}); 
 				break;
 			case "price-dsc": 
-				productsR.sort((a,b) => {
-					return a.price < b.price;
+				productsR.sort(function(a,b) {
+					return b.price - a.price;
 				});
 				break;
 			case "price-asc": 
 			default:
-				productsR.sort((a,b) => {
-					return a.price > b.price;
+				productsR.sort(function(a,b) {
+					return a.price - b.price;
 				});
 		}
 		// TODO: Put this in a middleware
@@ -113,6 +112,10 @@ routerP.get("/api/products/:id", function(req, res) {
 
 routerP.post("/api/products/", function(req, res) {
 	// Verify id on insert
+	if (!req.body.id || req.body.id.constructor != Number) {
+		res.sendStatus(400);
+		return
+	}
 	//
 	// Verify name
 	if (!req.body.name || req.body.name.constructor != String || req.body.name == "") {
