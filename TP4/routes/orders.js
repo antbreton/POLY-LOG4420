@@ -10,7 +10,12 @@ routerP.get("/api/orders/next", function(req, res) {
         if (err) {
             res.send(err);
         } else //res.setHeader('Content-Type','application/json');
-            res.json(post.id);
+        {
+            if (post)
+                res.json(post.id);
+            else
+                res.json(0);
+        }
     });
     // Lire la DB trier
 });
@@ -84,7 +89,7 @@ routerP.post("/api/orders/", function(req, res, next) { // check "if there is no
             (i < req.body.products.length) && success; i++) {
 
             // check if it contains an id property
-            if (!req.body.products[i].hasOwnProperty("id")) {
+            if (!req.body.products[i].hasOwnProperty("productId")) {
                 res.status(400).send('{"error":"missing id property in object products"}');
                 success = 0;
             }
@@ -97,7 +102,7 @@ routerP.post("/api/orders/", function(req, res, next) { // check "if there is no
         db.Products.find({ id: { $in: products_ids } },
             function(err, products) {
                 // if the resulting array length is different than the initial id list length, then a product doesnt exist
-                if (products.length != products_ids.length) {
+                if (products && products.length != products_ids.length) {
                     res.status(400).send('{"error":"a product does not exist !"}');
 
                 } else

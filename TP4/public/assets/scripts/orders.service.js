@@ -19,7 +19,7 @@ onlineShop.ordersService = (function() {
      */
     self.createOrder = function(order) {
         if (order) {
-            pushIntoDB(order);
+            return pushIntoDB(order);
         }
     };
 
@@ -52,29 +52,25 @@ onlineShop.ordersService = (function() {
      */
     function pushIntoDB(order) {
         // get Next Order Id
-        $.ajax({
+        return $.ajax({
             url: '/api/orders/next',
             type: 'get',
-            contentType: "application/json",
-            success: function(data) {
-                var id = data;
-                if (res.hasOwnProperty("id")) {
-                    order.id = parseInt(id) + 1;
-                    $.ajax({
-                        url: '/api/orders',
-                        type: 'post',
-                        dataType: 'json',
-                        contentType: "application/json",
-                        success: function(data) {
-                            alert(JSON.stringify(data));
-                        },
-                        data: JSON.stringify(order)
-                    });
-                } else
-                    alert(data);
-            }
-        });
+            contentType: "application/json"
+        }).then(function(data) {
+            var id = data;
+            order.id = parseInt(id) + 1;
 
+            // create the order in db
+            return $.ajax({
+                url: '/api/orders',
+                type: 'post',
+                dataType: 'json',
+                contentType: "application/json",
+                data: JSON.stringify(order)
+            }).then(function() {
+                return id;
+            });
+        });
     }
 
     // Initializes the orders list.

@@ -85,13 +85,12 @@ onlineShop.shoppingCartService = (function($, productsService, shoppingcartcontr
      * @returns {number}  The items count.
      */
     self.getItemsCount = function() {
-        var total = 0;
-        for (var productId in items) {
-            if (items.hasOwnProperty(productId) && items[productId]) {
-                total += items[productId];
-            }
-        }
-        return total;
+        return $.ajax({
+            url: '/api/shopping-cart',
+            type: 'get',
+            contentType: "application/json"
+        }).then(function(data) { return data.length; });
+
     };
 
     /**
