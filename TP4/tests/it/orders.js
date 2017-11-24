@@ -12,7 +12,6 @@ var productsListLength = 0;
 
 chai.should();
 chai.use(chaiHttp);
-
 describe("API des commandes", function() {
   before(function(done) {
     Product.remove({}, function() {
@@ -64,6 +63,8 @@ describe("API des commandes", function() {
       });
     });
   });
+
+
 
   /*
    * Tests the GET /api/orders/:id route
@@ -318,6 +319,7 @@ describe("API des commandes", function() {
     });
   });
 });
+
 
 /**
  * Populates the database with initials values.

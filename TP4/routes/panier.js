@@ -48,7 +48,6 @@ routerP.post("/api/shopping-cart/", function(req, res) {
     }
 
     // Verify productId on db insert
-	console.log(req.body);
 	if (!req.body.productId || req.body.productId.constructor != Number) {
 		res.sendStatus(400);
 		return;
@@ -106,7 +105,6 @@ routerP.put("/api/shopping-cart/:productId", function(req, res) {
         if (!cp) {
             res.sendStatus(404);
         } else {
-            console.log(req.body.quantity);
             cp.quantity = req.body.quantity;
             res.sendStatus(204);
         }

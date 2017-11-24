@@ -32,12 +32,12 @@ onlineShop.shoppingCartService = (function($, productsService, shoppingcartcontr
                   items[productId] = quantity;
                 }
                 _updateLocalStorage();*/
-        $.ajax({
+        return $.ajax({
             url: '/api/shopping-cart',
             type: 'post',
             dataType: 'json',
             contentType: "application/json",
-            data: JSON.stringify({ "quantity": quantity, "productId": productId }),
+            data: JSON.stringify({ "quantity": quantity, "productId": productId })
         });
     };
 
@@ -89,7 +89,13 @@ onlineShop.shoppingCartService = (function($, productsService, shoppingcartcontr
             url: '/api/shopping-cart',
             type: 'get',
             contentType: "application/json"
-        }).then(function(data) { return data.length; });
+        }).then(function(data) {
+		var total = 0; 
+		data.forEach(function(p) {
+			total += p.quantity;
+		});
+		return total; 
+	});
     };
 
     /**
@@ -113,7 +119,7 @@ onlineShop.shoppingCartService = (function($, productsService, shoppingcartcontr
         $(".price").each(function(i, element) {
             var price = $(element).html().replace('$', '').replace(',', '.');
             console.log(price);
-            total += parseInt(price);
+            total += parseFloat(price);
         })
         return total;
     };

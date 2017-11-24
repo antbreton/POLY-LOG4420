@@ -363,7 +363,6 @@ function addEntry(agent, entry, callback) {
     .set("content-type", "application/json")
     .send(entry)
     .end(function(err, res) {
-	console.log(res.statusCode);
       res.should.have.status(201);
       callback();
     });

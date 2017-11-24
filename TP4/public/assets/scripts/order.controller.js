@@ -30,7 +30,7 @@ var onlineShop = onlineShop || {};
                 phone: $("#phone").val(),
                 products: items.map(function(item) {
                     return {
-                        productId: item.product.id,
+                        id: item.product.id,
                         quantity: item.quantity
                     }
                 })
@@ -38,7 +38,7 @@ var onlineShop = onlineShop || {};
             ordersService.createOrder(order).done(function(orderid) {
                 shoppingCartService.removeAllItems();
 
-                window.location.replace("./confirmation?id=" + orderid + "&name=" + order.firstName);
+                window.location.replace("./confirmation?id=" + (parseInt(orderid)+1) + "&name=" + order.firstName+"%20"+order.lastName);
             });
 
         });
