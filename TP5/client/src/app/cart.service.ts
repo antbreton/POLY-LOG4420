@@ -1,26 +1,28 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, RequestOptions, Headers, Response } from '@angular/http';
+import { Product, ProductsService } from './products.service';
 import { Config } from './config';
 
 /**
- * Defines a product.
+ * Defines a cartEntry for the API.
  */
-export class Product  {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-  category: string;
-  description: string;
-  features: string[];
+export class CartEntry  {
+  productId: number;
+  quantity: number;
 }
 
+export class CartEntryRendered  {
+  quantity: number;
+  product : Product;
+}
 /**
  * Defines the service responsible to retrieve the products in the database.
  */
 @Injectable()
 export class CartService {
 
+  headers = new Headers({ 'Content-Type': 'application/json' });
+  options = new RequestOptions({ headers: this.headers, withCredentials:true});
   /**
    * Handles the current error.
    *
@@ -44,30 +46,30 @@ export class CartService {
    *
    * @param [sortingCriteria]       The sorting criteria to use. If no value is specified, the list returned isn't sorted.
    * @param [category]              The category of the product. The default value is "all".
-   * @return {Promise<Product[]>}   The category of the product. The default value is "all".
+   * @return {Promise<CartEntry[]>}   The category of the product. The default value is "all".
    */
-  getProducts(sortingCriteria?: string, category?: string): Promise<Product[]> {
-    let url = `${Config.apiUrl}/products?criteria=${sortingCriteria}`;
-    if (category && category !== 'all') {
-      url += `&category=${category}`;
-    }
-    return this.http.get(url)
+  getProductsFromCart(): Promise<CartEntry[]> {
+    let url = `${Config.apiUrl}/shopping-cart`;
+
+
+    return this.http.get(url, this.options)
       .toPromise()
-      .then(products => products.json() as Product[])
+      .then(cartentry => cartentry.json() as CartEntry[])
       .catch(CartService.handleError);
   }
 
-  /**
-   * Gets the product associated with the product ID specified.
-   *
-   * @param productId               The product ID associated with the product to retrieve.
-   * @returns {Promise<Product>}    A promise that contains the product associated with the ID specified.
-   */
-  getProduct(productId: number): Promise<Product> {
-    const url = `${Config.apiUrl}/products/${productId}`;
-    return this.http.get(url)
-      .toPromise()
-      .then(product => product.json() as Product)
-      .catch(() => null);
+  addToCart(c : CartEntry): Promise<Response> {
+    let url = `${Config.apiUrl}/shopping-cart`;
+	return this.http.post(url, JSON.stringify(c), this.options).toPromise()
+	  .then(response => response as Response)
+      .catch(CartService.handleError);
   }
+
+  removeFromCart(id : number): Promise<Response> {
+    let url = `${Config.apiUrl}/shopping-cart/${id}`;
+	return this.http.delete(url, this.options).toPromise()
+	  .then(response => response as Response)
+      .catch(CartService.handleError);
+  }
+
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Product, ProductsService } from '../products.service';
+import { CartService, CartEntry } from '../cart.service';
 import { Observable } from "rxjs/Rx"
 import { trigger, state, style, animate, transition } from '@angular/animations';
 
@@ -29,7 +30,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 export class ProductComponent implements OnInit {
 
   product : Product = null;
-  quantity : Number = 1;
+  quantity : number = 1;
   toast : Boolean = false;
 
   /**
@@ -37,7 +38,7 @@ export class ProductComponent implements OnInit {
    *
    * @param route                   The active route.
    */
-  constructor(private router: Router, private route: ActivatedRoute, private PS: ProductsService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private PS: ProductsService, private CS : CartService) { }
 
   /**
    * Occurs when the component is initialized.
@@ -56,13 +57,20 @@ export class ProductComponent implements OnInit {
   }
 
   onAdd(): void {
-    // TODO: Call Cart Service to add product
 
-
-    this.toast = true;
-    let timer = Observable.timer(5000);
-    timer.subscribe(t => {
-      this.toast = false;
-    });
+	let entry = new CartEntry();	
+	entry.productId=this.product.id;
+	entry.quantity=this.quantity;
+	this.CS.addToCart(entry).then(response =>
+	{
+		if(response.status == 201)
+		{
+			this.toast = true;
+			let timer = Observable.timer(5000);
+			timer.subscribe(t => {
+			  this.toast = false;
+			});
+		}
+	})
   }
 }
