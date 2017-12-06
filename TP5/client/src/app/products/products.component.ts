@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Product } from '../products.service';
 import { ProductsService } from '../products.service';
-
+import { Order, OrderProduct, OrdersService } from '../orders.service';
+import { FormattedPricePipe } from '../formatted-price.pipe';
 
 /**
  * Defines the component responsible to manage the display of the products page.
@@ -16,7 +17,7 @@ export class ProductsComponent {
   category: string = "all";
   sorting: string = "price-asc";
 
-  constructor(private PS: ProductsService) {
+  constructor(private PS: ProductsService, private OS: OrdersService) {
     this.requestProducts();
   }
 
