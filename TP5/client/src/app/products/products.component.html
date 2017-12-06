@@ -15,7 +15,7 @@
       <button [ngClass]="{'selected': sorting == 'price-asc'}" (click)="onSortingClick('price-asc')">Prix (bas-haut)</button>
       <button [ngClass]="{'selected': sorting == 'price-dsc'}" (click)="onSortingClick('price-dsc')">Prix (haut-bas)</button>
       <button [ngClass]="{'selected': sorting == 'alpha-asc'}" (click)="onSortingClick('alpha-asc')">Nom (A-Z)</button>
-      <button [ngClass]="{'selected': sorting == 'alpha-dsc'}" (click)="onSortingClick('alpha-dsc')">Nom (Z-A)</button>  
+      <button [ngClass]="{'selected': sorting == 'alpha-dsc'}" (click)="onSortingClick('alpha-dsc')">Nom (Z-A)</button>
     </div>
   </section>
 </section>
@@ -27,7 +27,7 @@
       <a routerLink="/produits/{{product.id}}" title="En savoir plus...">
         <h2>{{product.name}}</h2>
         <img alt="{{product.name}}" src="./assets/img/{{product.image}}">
-        <p><small>Prix</small> {{product.price}}&thinsp;$</p>
+        <p><small>Prix</small>  {{product.price | FormattedPrice }}</p>
       </a>
     </div>
   </div>

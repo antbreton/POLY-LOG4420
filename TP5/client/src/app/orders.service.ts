@@ -1,18 +1,25 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, RequestOptions, Headers } from '@angular/http';
 import { Config } from './config';
 
 /**
  * Defines a product.
  */
-export class Order  {
+
+
+//TODO: Replace with CartProduct
+export class OrderProduct {
   id: number;
-  name: string;
-  price: number;
-  image: string;
-  category: string;
-  description: string;
-  features: string[];
+  quantity: number;
+}
+
+export class Order {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  products: OrderProduct[];
 }
 
 /**
@@ -20,54 +27,50 @@ export class Order  {
  */
 @Injectable()
 export class OrdersService {
-
-  /**
-   * Handles the current error.
-   *
-   * @param error                   The error to handle.
-   * @return {Promise<object>}      A promise object.
-   */
   private static handleError(error: any): Promise<any> {
     console.error('An error occurred', error);
     return Promise.reject(error.feedbackMessage || error);
   }
 
-  /**
-   * Initializes a new instance of the ProductsService class.
-   *
-   * @param http                    The HTTP service to use.
-   */
   constructor(private http: Http) { }
 
-  /**
-   * Gets all the products in the database.
-   *
-   * @param [sortingCriteria]       The sorting criteria to use. If no value is specified, the list returned isn't sorted.
-   * @param [category]              The category of the product. The default value is "all".
-   * @return {Promise<Product[]>}   The category of the product. The default value is "all".
-   */
-  getOrders(sortingCriteria?: string, category?: string): Promise<Order[]> {
-    let url = `${Config.apiUrl}/products?criteria=${sortingCriteria}`;
-    if (category && category !== 'all') {
-      url += `&category=${category}`;
-    }
+  getOrders(): Promise<Order[]> {
+    let url = `${Config.apiUrl}/orders`;
     return this.http.get(url)
       .toPromise()
-      .then(products => products.json() as Order[])
+      .then(orders => orders.json() as Order[])
       .catch(OrdersService.handleError);
   }
 
-  /**
-   * Gets the product associated with the product ID specified.
-   *
-   * @param productId               The product ID associated with the product to retrieve.
-   * @returns {Promise<Product>}    A promise that contains the product associated with the ID specified.
-   */
-  getProduct(productId: number): Promise<Product> {
-    const url = `${Config.apiUrl}/products/${productId}`;
+  getOrder(orderId: number): Promise<Order> {
+    const url = `${Config.apiUrl}/orders/${orderId}`;
     return this.http.get(url)
       .toPromise()
-      .then(product => product.json() as Product)
+      .then(order => order.json() as Order)
       .catch(() => null);
+  }
+
+  postOrder(order: Order): Promise<number> {
+    const url = `${Config.apiUrl}/orders/`;
+    return this.http.post(url, order)
+      .toPromise()
+      .then(r => r.status)
+      .catch(r => r.status)
+  }
+
+  deleteOrder(orderId: number): Promise<number> {
+    const url = `${Config.apiUrl}/orders/${orderId}`;
+    return this.http.delete(url)
+      .toPromise()
+      .then(r => r.status)
+      .catch(r => r.status)
+  }
+
+  deleteOrders(): Promise<number> {
+    const url = `${Config.apiUrl}/orders/`;
+    return this.http.delete(url)
+      .toPromise()
+      .then(r => r.status)
+      .catch(r => r.status)
   }
 }
