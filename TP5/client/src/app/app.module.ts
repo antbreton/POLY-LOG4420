@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
@@ -14,6 +15,8 @@ import { OrderComponent } from './order/order.component';
 import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProductsService } from './products.service';
+import { CartService } from './cart.service';
+
 
 // Application routes
 const appRoutes: Routes = [
@@ -42,6 +45,7 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(
@@ -50,7 +54,8 @@ const appRoutes: Routes = [
     )
   ],
   providers: [
-    ProductsService
+    ProductsService,
+    CartService
   ],
   bootstrap: [AppComponent]
 })
