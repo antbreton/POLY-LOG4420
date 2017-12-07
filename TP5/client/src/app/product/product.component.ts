@@ -71,7 +71,7 @@ export class ProductComponent implements OnInit {
 			timer.subscribe(t => {
 			  this.toast = false;
       });
-      this.app.nombreProduits++;
+      this.app.nombreProduits+=entry.quantity;
 		}
 	})
   }

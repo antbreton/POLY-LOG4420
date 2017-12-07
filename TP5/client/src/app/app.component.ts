@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CartService } from './cart.service'
-import { Observable } from 'rxjs/rx'
+
 
 /**
  * Defines the main component of the application.

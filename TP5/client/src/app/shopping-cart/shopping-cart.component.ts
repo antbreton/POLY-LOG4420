@@ -22,7 +22,7 @@ export class ShoppingCartComponent {
 
 	constructor(private CS: CartService, private PS: ProductsService, private app: AppComponent) {
     this.requestProducts();
-    this.app.nombreProduits = this.cartEntriesRendered.length;
+    this.computeNbProduct();
   }
 
   computeTotal()
@@ -35,6 +35,8 @@ export class ShoppingCartComponent {
   }
 
   clicRemove(id : number): void {
+	if(confirm("Voulez-vous supprimer le produit du panier ?"))
+	{
 		this.CS.removeFromCart(id).then(response =>
 		{
 			if(response.status == 204)
@@ -45,9 +47,20 @@ export class ShoppingCartComponent {
 						this.cartEntriesRendered.splice(i,1);
 					}
         this.computeTotal();
-        this.app.nombreProduits = this.cartEntriesRendered.length;
+	this.computeNbProduct();
 			}
 		})
+	}
+  }
+
+  computeNbProduct(): number {
+  	let sum = 0;
+	for(let cartEntry of this.cartEntriesRendered)
+	{
+		sum+=cartEntry.quantity;
+	}
+	this.app.nombreProduits=sum;
+	return sum;
   }
 
   clicUpdateQty(id : number, newQty : number): void {
@@ -59,9 +72,10 @@ export class ShoppingCartComponent {
 					if(this.cartEntriesRendered[i].product.id==id)
 					{
 						this.cartEntriesRendered[i].quantity = newQty;
+
 					}
         this.computeTotal();
-        this.app.nombreProduits = this.cartEntriesRendered.length;
+	this.computeNbProduct();
 			}
 		})
   }
@@ -69,15 +83,18 @@ export class ShoppingCartComponent {
 
 
   clicClear(): void {
+	if(confirm("Voulez-vous supprimer tous les produits du panier ?"))
+	{
 		this.CS.ClearCart().then(response =>
 		{
       if(response.status == 204)
       {
         this.cartEntriesRendered = new Array<CartEntryRendered>();
         this.computeTotal();
-        this.app.nombreProduits = this.cartEntriesRendered.length;
+        this.computeNbProduct();
       }
     })
+}
   }
 
 
@@ -91,7 +108,7 @@ export class ShoppingCartComponent {
 					cartEntryRendered.quantity = cartEntry.quantity;
           this.cartEntriesRendered.push(cartEntryRendered);
           this.computeTotal();
-          this.app.nombreProduits = this.cartEntriesRendered.length;
+          this.computeNbProduct();
         })
 			}
     })

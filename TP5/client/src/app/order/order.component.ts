@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { Order, OrderProduct, OrdersService } from "../orders.service";
 import { CartEntry, CartService } from "../cart.service";
+import { AppComponent } from '../app.component'
+
 declare const $: any;
 
 /**
@@ -16,7 +18,7 @@ export class OrderComponent implements OnInit {
   orderForm: any;
   order : Order;
 
-  constructor(private OS: OrdersService, private CS: CartService, private router: Router) {
+  constructor(private OS: OrdersService, private CS: CartService, private router: Router, private app: AppComponent) {
     this.order = new Order();
   }
 
@@ -67,9 +69,11 @@ export class OrderComponent implements OnInit {
       }
 
       this.OS.getOrders().then(order => {
-        this.order.id = order.length;
+        this.order.id = order.length+1;
         this.OS.postOrder(this.order).then(code => {
           if (code == 201) {
+	    this.CS.ClearCart();
+            this.app.nombreProduits=0;
             this.router.navigate(['/confirmation'], {queryParams : {
               id: this.order.id,
               nom: this.order.firstName + " " + this.order.lastName

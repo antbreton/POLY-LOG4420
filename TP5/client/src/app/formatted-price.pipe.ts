@@ -8,7 +8,7 @@ export class FormattedPricePipe implements PipeTransform {
   transform(value: number): string {
     let format =value.toFixed(2);
     format=format.replace('.',',');
-    format += "$";
+    //format += "$";
 
     return format;
   }

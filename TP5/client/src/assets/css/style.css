@@ -1,4 +1,9 @@
 /***** General Style *****/
+.hidden
+{
+	visibility:hidden;
+}
+
 html {
   position: relative;
   min-height: 100%;
