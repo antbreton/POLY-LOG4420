@@ -22,7 +22,7 @@
                 <i class="fa fa-circle fa-stack-2x fa-inverse"></i>
                 <i class="fa fa-shopping-cart fa-stack-1x"></i>
               </span>
-            <span class="count">6</span>
+            <span class="count" *ngIf="nombreProduits>0">{{nombreProduits}}</span>
           </a>
         </li>
       </ul>
@@ -30,7 +30,7 @@
   </div>
 </header>
 <main>
-  <router-outlet></router-outlet>
+  <router-outlet (change)="onChange($event)"></router-outlet>
 </main>
 <footer>
   <p>Par

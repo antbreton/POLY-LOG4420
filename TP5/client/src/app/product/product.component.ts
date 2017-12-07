@@ -4,6 +4,7 @@ import { Product, ProductsService } from '../products.service';
 import { CartService, CartEntry } from '../cart.service';
 import { Observable } from "rxjs/Rx"
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { AppComponent } from '../app.component'
 
 /**
  * Defines the component responsible to manage the product page.
@@ -38,7 +39,7 @@ export class ProductComponent implements OnInit {
    *
    * @param route                   The active route.
    */
-  constructor(private router: Router, private route: ActivatedRoute, private PS: ProductsService, private CS : CartService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private PS: ProductsService, private CS : CartService, private app: AppComponent) { }
 
   /**
    * Occurs when the component is initialized.
@@ -58,7 +59,7 @@ export class ProductComponent implements OnInit {
 
   onAdd(): void {
 
-	let entry = new CartEntry();	
+	let entry = new CartEntry();
 	entry.productId=this.product.id;
 	entry.quantity=this.quantity;
 	this.CS.addToCart(entry).then(response =>
@@ -69,7 +70,8 @@ export class ProductComponent implements OnInit {
 			let timer = Observable.timer(5000);
 			timer.subscribe(t => {
 			  this.toast = false;
-			});
+      });
+      this.app.nombreProduits++;
 		}
 	})
   }

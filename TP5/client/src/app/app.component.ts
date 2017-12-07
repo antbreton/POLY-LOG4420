@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { CartService } from './cart.service'
+import { Observable } from 'rxjs/rx'
 
 /**
  * Defines the main component of the application.
@@ -15,5 +17,16 @@ export class AppComponent {
     'Antoine Breton'
   ];
 
+  nombreProduits : number = 0;
+
+  constructor(private CS: CartService) {
+    CS.getProductsFromCart().then(products => {
+      this.nombreProduits = products.length;
+    });
+  }
+
+  onChange() : void {
+    console.log("LOOOL");
+  }
   // TODO: À compléter
 }

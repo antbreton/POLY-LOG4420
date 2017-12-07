@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { Product, ProductsService } from '../products.service';
 import { CartService,CartEntry, CartEntryRendered } from '../cart.service';
 import { FormattedPricePipe } from "../formatted-price.pipe";
+import { AppComponent } from "../app.component";
 /**
  * Defines the component responsible to manage the shopping cart page.
  */
@@ -16,12 +17,12 @@ import { FormattedPricePipe } from "../formatted-price.pipe";
 
 
 export class ShoppingCartComponent {
-
   cartEntriesRendered : CartEntryRendered [] = new Array<CartEntryRendered>();
   total : number;
 
-	constructor(private CS: CartService, private PS: ProductsService) {
+	constructor(private CS: CartService, private PS: ProductsService, private app: AppComponent) {
     this.requestProducts();
+    this.app.nombreProduits = this.cartEntriesRendered.length;
   }
 
   computeTotal()
@@ -44,6 +45,7 @@ export class ShoppingCartComponent {
 						this.cartEntriesRendered.splice(i,1);
 					}
         this.computeTotal();
+        this.app.nombreProduits = this.cartEntriesRendered.length;
 			}
 		})
   }
@@ -59,6 +61,7 @@ export class ShoppingCartComponent {
 						this.cartEntriesRendered[i].quantity = newQty;
 					}
         this.computeTotal();
+        this.app.nombreProduits = this.cartEntriesRendered.length;
 			}
 		})
   }
@@ -72,6 +75,7 @@ export class ShoppingCartComponent {
       {
         this.cartEntriesRendered = new Array<CartEntryRendered>();
         this.computeTotal();
+        this.app.nombreProduits = this.cartEntriesRendered.length;
       }
     })
   }
@@ -87,8 +91,8 @@ export class ShoppingCartComponent {
 					cartEntryRendered.quantity = cartEntry.quantity;
           this.cartEntriesRendered.push(cartEntryRendered);
           this.computeTotal();
-        }
-      )
+          this.app.nombreProduits = this.cartEntriesRendered.length;
+        })
 			}
     })
   }
