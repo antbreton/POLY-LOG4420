@@ -19,7 +19,7 @@ export class Order {
   lastName: string;
   email: string;
   phone: string;
-  products: OrderProduct[];
+  products: OrderProduct[] = new Array<OrderProduct>();
 }
 
 /**

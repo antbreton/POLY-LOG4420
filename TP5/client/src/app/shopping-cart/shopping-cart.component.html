@@ -1,42 +1,45 @@
 <article>
   <h1>Panier</h1>
-  <table class="table shopping-cart-table">
-    <thead>
-    <tr>
-      <th></th>
-      <th>Produit</th>
-      <th>Prix unitaire</th>
-      <th>Quantité</th>
-      <th>Prix</th>
-    </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let cartEntryRendered of cartEntriesRendered">
-        <td>
-          <button class="remove-item-button" title="Supprimer" (click)="clicRemove(cartEntryRendered.product.id)">
-            <i class="fa fa-times"></i>
-          </button>
-        </td>
-        <td>
-          <a routerLink="/produits/{{cartEntryRendered.product.id}}">{{cartEntryRendered.product.name}}</a>
-        </td>
-        <td>{{cartEntryRendered.product.price}}</td>
-        <td>
-          <div class="row">
-            <div class="col">
-              <button class="remove-quantity-button" title="Retirer" ><i class="fa fa-minus"></i></button>
-            </div>
-            <div class="col quantity">{{cartEntryRendered.quantity}}</div>
-            <div class="col">
-              <button class="add-quantity-button" title="Ajouter"><i class="fa fa-plus"></i></button>
-            </div>
-          </div>
-        </td>
-        <td class="price">{{cartEntryRendered.quantity*cartEntryRendered.product.price}}</td>
+  <p *ngIf="cartEntriesRendered.length == 0">Aucun produit dans le panier.</p>
+  <div *ngIf="cartEntriesRendered.length > 0">
+      <table class="table shopping-cart-table">
+      <thead>
+      <tr>
+        <th></th>
+        <th>Produit</th>
+        <th>Prix unitaire</th>
+        <th>Quantité</th>
+        <th>Prix</th>
       </tr>
-    </tbody>
-  </table>
-  <p class="shopping-cart-total">Total: <strong id="total-amount">704,94&thinsp;$</strong></p>
-  <a class="btn pull-right" routerLink="/commande">Commander <i class="fa fa-angle-double-right"></i></a>
-  <button class="btn" id="remove-all-items-button"><i class="fa fa-trash-o"></i>&nbsp; Vider le panier</button>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cartEntryRendered of cartEntriesRendered">
+          <td>
+            <button class="remove-item-button" title="Supprimer" (click)="clicRemove(cartEntryRendered.product.id)">
+              <i class="fa fa-times"></i>
+            </button>
+          </td>
+          <td>
+            <a routerLink="/produits/{{cartEntryRendered.product.id}}">{{cartEntryRendered.product.name}}</a>
+          </td>
+          <td>{{cartEntryRendered.product.price | FormattedPrice}}</td>
+          <td>
+            <div class="row">
+              <div class="col">
+                <button class="remove-quantity-button" title="Retirer"  [disabled]="cartEntryRendered.quantity<=1" (click)="clicUpdateQty(cartEntryRendered.product.id,cartEntryRendered.quantity-1)" ><i class="fa fa-minus"></i></button>
+              </div>
+              <div class="col quantity">{{cartEntryRendered.quantity}}</div>
+              <div class="col">
+                <button class="add-quantity-button" title="Ajouter" (click)="clicUpdateQty(cartEntryRendered.product.id,cartEntryRendered.quantity+1)"><i class="fa fa-plus"></i></button>
+              </div>
+            </div>
+          </td>
+          <td class="price">{{(cartEntryRendered.quantity*cartEntryRendered.product.price) | FormattedPrice}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="shopping-cart-total">Total: <strong id="total-amount">{{ total | FormattedPrice}}</strong></p>
+    <a class="btn pull-right" routerLink="/commande">Commander <i class="fa fa-angle-double-right"></i></a>
+    <button class="btn" id="remove-all-items-button" (click)="clicClear()"><i class="fa fa-trash-o" ></i>&nbsp; Vider le panier</button>
+  </div>
 </article>

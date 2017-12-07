@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
+import { Order, OrderProduct, OrdersService } from "../orders.service";
+import { CartEntry, CartService } from "../cart.service";
 declare const $: any;
 
 /**
@@ -11,6 +14,11 @@ declare const $: any;
 export class OrderComponent implements OnInit {
 
   orderForm: any;
+  order : Order;
+
+  constructor(private OS: OrdersService, private CS: CartService, private router: Router) {
+    this.order = new Order();
+  }
 
   /**
    * Occurs when the component is initialized.
@@ -45,10 +53,33 @@ export class OrderComponent implements OnInit {
   /**
    * Submits the order form.
    */
-  submit() {
+  onSubmit() {
     if (!this.orderForm.valid()) {
       return;
     }
-    // TODO: Compléter la soumission des informations lorsque le formulaire soumis est valide.
+
+    this.CS.getProductsFromCart().then( cartEntries => {
+      for (let cartEntry of cartEntries) {
+        let oe = new OrderProduct();
+        oe.id = cartEntry.productId;
+        oe.quantity = cartEntry.quantity;
+        this.order.products.push(oe);
+      }
+
+      this.OS.getOrders().then(order => {
+        this.order.id = order.length;
+        this.OS.postOrder(this.order).then(code => {
+          if (code == 201) {
+            this.router.navigate(['/confirmation'], {queryParams : {
+              id: this.order.id,
+              nom: this.order.firstName + " " + this.order.lastName
+            }})
+            this.order = new Order();
+          }
+        })
+      })
+    })
+
+    return;
   }
 }

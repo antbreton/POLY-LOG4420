@@ -65,6 +65,20 @@ export class CartService {
       .catch(CartService.handleError);
   }
 
+  updateQty(productId : number, qty : number): Promise<Response> {
+    let url = `${Config.apiUrl}/shopping-cart/${productId}`;
+	return this.http.put(url, JSON.stringify({quantity:qty}), this.options).toPromise()
+	  .then(response => response as Response)
+      .catch(CartService.handleError);
+  }
+
+  ClearCart(): Promise<Response> {
+    let url = `${Config.apiUrl}/shopping-cart`;
+	return this.http.delete(url,  this.options).toPromise()
+	  .then(response => response as Response)
+      .catch(CartService.handleError);
+  }
+
   removeFromCart(id : number): Promise<Response> {
     let url = `${Config.apiUrl}/shopping-cart/${id}`;
 	return this.http.delete(url, this.options).toPromise()
